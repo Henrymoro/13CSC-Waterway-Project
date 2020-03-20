@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 import java.awt.event.*;
-public class Main extends JFrame implements ActionListener 
+public class Main extends JFrame implements ActionListener, MouseListener 
 {
     JMenuBar menuBar;
     JMenu menu;
@@ -135,11 +135,27 @@ public class Main extends JFrame implements ActionListener
         //Canvas theGraphic = new Canvas();
         //panel.add(theGraphic);
         
+        addMouseListener(this);
+        
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         this.pack();
         this.toFront();
         this.setVisible(true);
+    }
+    public void mouseExited(MouseEvent e) {System.out.println("exit");}
+    public void mouseEntered(MouseEvent e) {System.out.println("enter");}
+    public void mouseReleased(MouseEvent e) {System.out.println("release");}
+    public void mousePressed(MouseEvent e) {System.out.println("press");}
+    public void mouseClicked(MouseEvent e) {
+        int mousex = e.getX();
+        int mousey = e.getY();
+        
+        if (mousex > x && mousex < x+100 && mousey >y && mousey < y + 50){
+            createDialogExample("Wow, you clicked on the blue rectangle");
+        }
+        
+        System.out.println("click at " + mousex + ", " + mousey);
     }
     public void createDialogExample(String words){
         JDialog box = new JDialog(this);
