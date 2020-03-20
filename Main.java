@@ -26,6 +26,8 @@ public class Main extends JFrame implements ActionListener, MouseListener
     int a = 150;
     int b = 150;
     
+    String test = ("test");
+    
     final String fileName = "blueRect.png";
     ImageIcon image = new ImageIcon(fileName);
     /**
