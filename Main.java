@@ -23,6 +23,9 @@ public class Main extends JFrame implements ActionListener
     int x = 350;
     int y = 350;
     
+    int a = 150;
+    int b = 150;
+    
     final String fileName = "blueRect.png";
     ImageIcon image = new ImageIcon(fileName);
     /**
@@ -102,10 +105,35 @@ public class Main extends JFrame implements ActionListener
         menuItem.addActionListener(this);
         menu.add(menuItem);
         
+        menu = new JMenu("Move Red Rectangle");
+        menuBar.add(menu);
+        
+        menuItem=new JMenuItem("Up2");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('w'));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Down2");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('s'));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Left2");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('a'));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Right2");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('d'));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(400,400));
         Canvas theGraphic = new Canvas();
         panel.add(theGraphic);
+        
+        //JPanel panel = new JPanel();
+        //panel.setPreferredSize(new Dimension(400,400));
+        //Canvas theGraphic = new Canvas();
+        //panel.add(theGraphic);
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -125,6 +153,11 @@ public class Main extends JFrame implements ActionListener
     public void paint (Graphics g) {
         super.paint(g);
         image.paintIcon(this,g,x,y);
+    }
+    public void red (Graphics g) {
+        super.paint(g);
+        image.paintIcon(this,g,a,b);
+        
     }
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
@@ -183,7 +216,27 @@ public class Main extends JFrame implements ActionListener
                 System.out.println("Right");
                 x = x + 50;
                 repaint();
-                break; 
+                break;
+            case "Down2" : 
+                System.out.println("Down");
+                y = y + 50;
+                repaint();
+                break;
+            case "Up2" : 
+                System.out.println("Up");
+                y = y - 50;
+                repaint();
+                break;
+            case "Left2" : 
+                System.out.println("Left");
+                x = x - 50;
+                repaint();
+                break;
+            case "Right2" : 
+                System.out.println("Right");
+                x = x + 50;
+                repaint();
+                break;
             default : 
                 System.out.println("Invalid");
                 createDialogExample("Invalid");
