@@ -16,21 +16,24 @@ public class Main extends JFrame implements ActionListener
     JMenu menu;
     JMenuItem menuItem;
     
+    Scanner inputStream = new Scanner(System.in);
+    
+    Canvas theGraphic;
+    
+    int x = 350;
+    int y = 350;
+    
+    final String fileName = "blueRect.png";
+    ImageIcon image = new ImageIcon(fileName);
     /**
      * Constructor for objects of class Main
      */
     public Main()
     {
-        Scanner inputStream = new Scanner(System.in);
-        System.out.println("The window is called:");
-        String windowName = inputStream.nextLine();
-        System.out.println("The dimensions are:");
-        int dimensionsX = Integer.parseInt(inputStream.nextLine());
-        int dimensionsY = Integer.parseInt(inputStream.nextLine());
         
-        setTitle(windowName);
+        setTitle("My Window");
         
-        this.getContentPane().setPreferredSize(new Dimension(dimensionsX,dimensionsY));
+        this.getContentPane().setPreferredSize(new Dimension(700,700));
         
         menuBar=new JMenuBar();
         this.setJMenuBar(menuBar);
@@ -38,10 +41,6 @@ public class Main extends JFrame implements ActionListener
         menu = new JMenu("File");
         menuBar.add(menu);
         
-        menuItem=new JMenuItem("Save");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke('s'));
-        menuItem.addActionListener(this);
-        menu.add(menuItem);
         menuItem=new JMenuItem("Open");
         menuItem.setAccelerator(KeyStroke.getKeyStroke('o'));
         menuItem.addActionListener(this);
@@ -83,6 +82,31 @@ public class Main extends JFrame implements ActionListener
         menuItem.addActionListener(this);
         menu.add(menuItem);
         
+        menu = new JMenu("Move Blue Rectangle");
+        menuBar.add(menu);
+        
+        menuItem=new JMenuItem("Up");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke("UP"));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Down");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke("DOWN"));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Left");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke("LEFT"));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem=new JMenuItem("Right");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke("RIGHT"));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(400,400));
+        Canvas theGraphic = new Canvas();
+        panel.add(theGraphic);
+        
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         this.pack();
@@ -97,6 +121,10 @@ public class Main extends JFrame implements ActionListener
         box.toFront();
         box.setVisible(true);
         box.setTitle("Cube");
+    }
+    public void paint (Graphics g) {
+        super.paint(g);
+        image.paintIcon(this,g,x,y);
     }
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
@@ -136,6 +164,26 @@ public class Main extends JFrame implements ActionListener
                 System.out.println("Text");
                 createDialogExample("Insert Text");
                 break;
+            case "Down" : 
+                System.out.println("Down");
+                y = y + 50;
+                repaint();
+                break;
+            case "Up" : 
+                System.out.println("Up");
+                y = y - 50;
+                repaint();
+                break;
+            case "Left" : 
+                System.out.println("Left");
+                x = x - 50;
+                repaint();
+                break;
+            case "Right" : 
+                System.out.println("Right");
+                x = x + 50;
+                repaint();
+                break; 
             default : 
                 System.out.println("Invalid");
                 createDialogExample("Invalid");
