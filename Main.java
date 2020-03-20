@@ -9,8 +9,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
-
-public class Main extends JFrame
+import java.awt.event.*;
+public class Main extends JFrame implements ActionListener 
 {
     JMenuBar menuBar;
     JMenu menu;
@@ -35,24 +35,30 @@ public class Main extends JFrame
         menuBar=new JMenuBar();
         this.setJMenuBar(menuBar);
         
-        menu = new JMenu("Numbers");
+        menu = new JMenu("File");
         menuBar.add(menu);
         
-        menuItem=new JMenuItem("The First");
+        menuItem=new JMenuItem("Save");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
-        menuItem=new JMenuItem("The Second");
+        menuItem=new JMenuItem("Open");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
-        menuItem=new JMenuItem("The Third");
+        menuItem=new JMenuItem("Import");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
         
-        menu = new JMenu("Words");
+        menu = new JMenu("Edit");
         menuBar.add(menu);
         
-        menuItem=new JMenuItem("The Apple");
+        menuItem=new JMenuItem("Delete");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
-        menuItem=new JMenuItem("The Banana");
+        menuItem=new JMenuItem("New...");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
-        menuItem=new JMenuItem("The Carrot");
+        menuItem=new JMenuItem("Transform");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -60,5 +66,9 @@ public class Main extends JFrame
         this.pack();
         this.toFront();
         this.setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e){
+        String cmd=e.getActionCommand();
+        System.out.println("Task completed");
     }
 }
